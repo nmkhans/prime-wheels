@@ -18,7 +18,7 @@
     </div>
   </section>
 
-  <section class="container py-3">
+  <section class="container py-5">
     <div class="row">
       <h3 class='text-center mb-4'>All available brands</h3>
     </div>
@@ -38,6 +38,37 @@
           </div>
         </div>
       </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="container py-1">
+    <div class="alert alert-light fw-semibold" role="alert">
+      Total available cars: {{cars | length}}
+    </div>
+  </section>
+
+  <section class="container py-5">
+    <div class="row">
+      {% for car in cars %}
+        <div class="col-4">
+          <div class="card mb-3">
+            <div class="row g-0 align-items-center">
+              <div class="col-md-6">
+                <img src="{{car.image.url}}" class="img-fluid rounded-start" alt="car image">
+              </div>
+              <div class="col-md-6">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <a href="{% url 'car-detail' car.slug %}" class="nav-link">{{car.name}}</a>
+                  </h5>
+                  <p class="card-text">Model: {{car.year_model}}</p>
+                  <p class="card-text">Brand: {{car.brand.name}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       {% endfor %}
     </div>
   </section>
