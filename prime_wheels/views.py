@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from brand.models import Brand
 
 def home(req):
-  return render(req, 'index.html')
+  brands = Brand.objects.all()
+  return render(req, 'index.html', {'brands': brands})

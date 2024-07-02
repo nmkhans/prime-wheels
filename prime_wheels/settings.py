@@ -24,6 +24,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'users',
+    'brand',
+    'car',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACK = 'bootstrap5'
