@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -28,11 +30,13 @@ class UserLoginView(LoginView):
   def get_success_url(self):
     return reverse_lazy('home')
   
+@login_required
 def user_logout(req):
   logout(req)
   messages.warning(req, 'Logout successfull')
   return redirect('home')
 
+@method_decorator(login_required, name = 'dispatch')
 class UserProfileView(TemplateView):
   template_name = 'users/user_profile.html'
   
@@ -40,6 +44,7 @@ class UserProfileView(TemplateView):
     kwargs['user'] = self.request.user
     return kwargs
   
+@method_decorator(login_required, name = 'dispatch')
 class UserUpdateView(UpdateView):
   template_name = 'users/user_update.html'
   model = User
@@ -51,6 +56,7 @@ class UserUpdateView(UpdateView):
     messages.success(self.request, 'Profile updated.')
     return super().form_valid(form)
   
+@method_decorator(login_required, name = 'dispatch')
 class UserPasswordUpdateView(PasswordChangeView):
   template_name = 'users/user_password_update.html'
   success_url = reverse_lazy('user-profile')
@@ -58,7 +64,8 @@ class UserPasswordUpdateView(PasswordChangeView):
   def form_valid(self, form):
     messages.success(self.request, 'Password updated.')
     return super().form_valid(form)
-  
+
+@method_decorator(login_required, name = 'dispatch') 
 class UserAllOrderView(ListView):
   template_name = 'users/user_all_order.html'
   # model = 

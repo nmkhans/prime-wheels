@@ -1,1 +1,22 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block title %} Home page {% endblock %}
+
+{% block maincontent %}
+  <section class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-6">
+        <h1 class="fw-semibold">We are Prime Wheels.</h1>
+        <h3>The best car listing and setting website out there.</h3>
+        <p>We a authentic and only best selling cars on internet. You can find your desired type of cars here. So browse today and grap one as your liking.</p>
+        <a class="btn btn-info text-white" href="">Browse cars</a>
+      </div>
+      <div class="col-6">
+        <img class="img-fluid" src="{% static 'banner.jpg' %}" alt="">
+      </div>
+    </div>
+  </section>
+
+  
+{% endblock %}
