@@ -8,4 +8,5 @@ urlpatterns = [
   path('profile/', views.UserProfileView.as_view(), name = 'user-profile'),
   path('update/<int:id>/', views.UserUpdateView.as_view(), name = 'user-update'),
   path('password-update/', views.UserPasswordUpdateView.as_view(), name = 'user-password-update'),
+  path('all-orders', views.all_orders, name = 'all-orders')
 ]

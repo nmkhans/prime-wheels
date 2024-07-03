@@ -1,11 +1,12 @@
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from .forms import UserRegisterForm, UserUpdateForm
 from django.views.generic import CreateView, TemplateView, UpdateView, ListView
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.auth.models import User
+from order.models import Order
 from django.contrib.auth import logout
 from django.contrib import messages
-from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
@@ -65,7 +66,11 @@ class UserPasswordUpdateView(PasswordChangeView):
     messages.success(self.request, 'Password updated.')
     return super().form_valid(form)
 
-@method_decorator(login_required, name = 'dispatch') 
-class UserAllOrderView(ListView):
-  template_name = 'users/user_all_order.html'
-  # model = 
+@login_required
+def all_orders(req):
+  user = User.objects.get(username = req.user.username)
+  orders = Order.objects.filter(user = user).order_by('-created_at')
+
+  return render(req, 'users/user_all_order.html', {
+    'orders': orders
+  })
