@@ -12,3 +12,6 @@ class Car(models.Model):
   price = models.IntegerField(null=True, blank=True)
   quantity = models.IntegerField(null=True, blank=True)
   image = models.ImageField(upload_to='')
+
+  def __str__(self):
+    return f"{self.name}"
