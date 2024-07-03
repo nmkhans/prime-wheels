@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'brand',
     'car',
     'comments',
+    'order',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACK = 'bootstrap5'

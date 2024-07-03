@@ -16,10 +16,16 @@
             <p class="card-text mb-3">Description: {{car.description}}</p>
             <p class="card-text mb-3">Brand: {{car.brand.name}}</p>
             <p class="card-text mb-3">Price: {{car.price}}</p>
-            <p class="card-text mb-3">Quantity: {{car.quantity}}</p>
+            <p class="card-text mb-3">Quantity: 
+              {% if car.quantity > 0 %}
+                {{car.quantity}}
+              {% else %}
+                Out of stock
+              {% endif %}
+            </p>
 
             {% if user.is_authenticated %}
-              <a href="#" class="btn btn-primary">Buy Now</a>
+              <a href="{% url 'place-order' %}?username={{user.username}}&car={{car.slug}}" class="btn btn-primary">Buy Now</a>
             {% endif %}
           </div>
         </div>
